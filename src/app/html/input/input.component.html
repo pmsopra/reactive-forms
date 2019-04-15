@@ -1,10 +1,13 @@
-<p>
+<div>
   <label class="{{ name }}" for="{{ id }}" aa="dasdas">
-    {{ label }}
+    <ng-content select="[label]"></ng-content>
   </label>
   <input
     type="{{ type }}"
     class="form-control"
     placeholder="{{ placeholder }}"
     id="{{ id }}">
-</p>
+  <div class="invalid-feedback">
+    <ng-content select="[error]"></ng-content>
+  </div>
+</div>

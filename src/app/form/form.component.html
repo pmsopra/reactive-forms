@@ -11,54 +11,42 @@
       <form class="needs-validation" novalidate>
         <div class="row">
           <div class="col-md-6 mb-3">
-            <label for="firstName">First name</label>
-            <input
-              type="text"
-              class="form-control"
-              id="firstName"
-              placeholder=""
-              value=""
-              required>
-            <div class="invalid-feedback">
-              Valid first name is required.
-            </div>
+            <app-input name="first-name" required>
+              <div label>Last name</div>
+              <div error>Valid first name is required.</div>
+            </app-input>
           </div>
 
           <div class="col-md-6 mb-3">
-            <label for="last-name">Last name</label>
-            <input type="text" id="last-name" class="form-control" placeholder="" value="" required>
-            <div class="invalid-feedback">
-              Valid last name is required.
-            </div>
-          </div>
-
-
-          <div class="col-md-6 mb-3">
-            <label for="email">Email <span class="text-muted">(Optional)</span></label>
-            <input type="email" class="form-control" placeholder="you@example.com">
-            <div class="invalid-feedback">
-              Please enter a valid email address for shipping updates.
-            </div>
+            <app-input name="last-name" required>
+              <div label>Last name</div>
+              <div error>Valid last name is required.</div>
+            </app-input>
           </div>
 
           <div class="col-md-6 mb-3">
-            <label>Age</label>
-            <input type="text" class="form-control">
-            <div class="invalid-feedback">
-              Please enter a valid email address for shipping updates.
-            </div>
+            <app-input name="email" required placeholder="you@example.com" type="email">
+              <div label>Email <span class="text-muted">(Optional)</span></div>
+              <div error>Please enter a valid email address for shipping updates.</div>
+            </app-input>
+          </div>
+
+          <div class="col-md-6 mb-3">
+            <app-input name="age">
+              <div label>Age</div>
+              <div error>Please enter a valid email address for shipping updates.</div>
+            </app-input>
           </div>
 
           <div class="col-12">
-            <app-input
-              label="Nickname"
-              name="nickname">
+            <app-input name="nickname">
+              <div label>Nickname</div>
+              <div error>Fill the nickname!</div>
             </app-input>
           </div>
         </div>
 
         <hr class="mb-4">
-
         <button class="btn btn-primary btn-lg btn-block" type="submit">Continue to checkout</button>
       </form>
     </div>
