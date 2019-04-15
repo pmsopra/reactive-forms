@@ -1,13 +1,37 @@
-<div>
-  <label class="{{ name }}" for="{{ id }}" aa="dasdas">
+<div [formGroup]="parentFormGroup">
+  <label for="{{ id }}">
     <ng-content select="[label]"></ng-content>
   </label>
+
   <input
     type="{{ type }}"
     class="form-control"
     placeholder="{{ placeholder }}"
-    id="{{ id }}">
+    id="{{ id }}"
+    formControlName="{{ formControlName }}"
+    [ngClass]="{'is-invalid': isInvalid() }">
+
   <div class="invalid-feedback">
-    <ng-content select="[error]"></ng-content>
+    <span #ref>
+      <ng-content select="[error]"></ng-content>
+    </span>
+
+    <div *ngIf="ref.childNodes.length === 0">
+      <span *ngIf="getErrors()?.required">
+        Please fill this field.
+      </span>
+      <span *ngIf="getErrors()?.minlength">
+        The value must be at least {{ getErrors().minlength.requiredLength }} characters
+        long.
+      </span>
+      <span *ngIf="getErrors()?.maxlength">
+        The value must be shorter than {{ getErrors().maxlength.requiredLength }}
+        characters.
+      </span>
+      <span *ngIf="getErrors()?.email">
+        Please provide a valid e-mail address.
+      </span>
+    </div>
   </div>
+
 </div>
