@@ -9,9 +9,10 @@
     placeholder="{{ placeholder }}"
     id="{{ id }}"
     formControlName="{{ formControlName }}"
-    [ngClass]="{'is-invalid': isInvalid() }">
+    [ngClass]="{'is-invalid': !isTyping && isInvalid() }">
+  <p>{{ parentFormGroup.get(formControlName).a }}</p>
 
-  <div class="invalid-feedback">
+  <div *ngIf="!isTyping" class="invalid-feedback">
     <span #ref>
       <ng-content select="[error]"></ng-content>
     </span>

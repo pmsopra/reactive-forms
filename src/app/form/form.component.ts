@@ -32,12 +32,30 @@ export class FormComponent implements OnInit {
 
   ngOnInit() {
     this.userForm = this.fb.group({
-      firstName: ['', [Validators.required, Validators.minLength(2)]],
-      lastName: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(100)]],
-      nickname: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(20)]],
-      email: ['', [Validators.required, Validators.email]],
+      firstName: ['', [
+        Validators.required,
+        Validators.minLength(10)
+      ]],
+      lastName: ['', [
+        Validators.required,
+        Validators.minLength(2),
+        Validators.maxLength(100)
+      ]],
+      nickname: ['', [
+        Validators.required,
+        Validators.minLength(3),
+        Validators.maxLength(20)
+      ]],
+      email: ['', [
+        Validators.required,
+        Validators.email
+      ]],
       age: [null, range(this.ageMin, this.ageMax)]
     });
+  }
+
+  isInvalid() {
+    return !this.userForm.valid;
   }
 
   onSubmit() {

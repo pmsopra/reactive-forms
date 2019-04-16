@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, forwardRef } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { __values } from 'tslib';
+import { debounceTime } from 'rxjs/operators';
 
 @Component({
   selector: 'app-input',
@@ -22,13 +22,24 @@ export class InputComponent implements OnInit, ControlValueAccessor {
   @Input() errorMessage?: string;
   @Input() formControlName: any;
   @Input() parentFormGroup: any;
-  @Input() errorFieldName?: string;
+  // tslint:disable-next-line: no-input-rename
   @Input('value') _value = '';
+
+  isTyping = false;
 
   ngOnInit() {
     if (!this.id) {
       this.id = 'id-' + Math.ceil(Math.random() * 10000000);
     }
+
+    const inputControl = this.parentFormGroup.get(this.formControlName);
+
+    inputControl.valueChanges
+      .subscribe(() => { this.isTyping = true; });
+
+    inputControl.valueChanges
+      .pipe(debounceTime(500))
+      .subscribe(() => { this.isTyping = false; });
   }
 
   isInvalid() {
